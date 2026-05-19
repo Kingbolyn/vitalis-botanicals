@@ -1,2 +1,13 @@
-# vitalis-botanicals
-Vitalis Botanicals This isn't a template. It's a bespoke, hand-coded HTML/CSS/JS brand experience with the following ready-to-deploy structure: Hero Landing — High-conversion above-the-fold with value proposition, dual CTAs, and organic visual identity Brand Story (About) — Narrative-driven trust building with founder mythology and many more
+# Vitalis Botanicals — Premium Digital Platform Engine
+
+Vitalis Botanicals is a production-grade, editorial-aesthetic frontend platform engineered explicitly for high-end wellness, herbalism, and bespoke direct-to-consumer (DTC) brands.
+
+## 🚀 Architectural Highlights
+- Premium UI Component Layouts: Custom typographic grid matching luxury lifestyle aesthetics.
+- Turnkey Core Features: Pre-engineered plant library structure capable of handling comprehensive databases, interactive ritual logs, and conversion-optimized checkout layouts.
+- Performance Optimized: Clean, lightweight execution ensuring lightning-fast client-side rendering scores.
+
+## 🛠️ Tech Stack
+- Frontend: [React / HTML5 / Vanilla JavaScript]
+- Styling: Custom CSS Variable Framework / Semantic Layouts
+- Tooling: [Vite / Webpack]
