@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitalis Botanicals — Nourish Your Nature</title>
+    <!-- Google Fonts for organic, modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* ============================================
+           CSS VARIABLES & RESET
+           Easy-to-edit color palette for beginners
+           ============================================ */
+        :root {
+            /* Earthy, organic color palette */
+            --sage-green: #7c9a6b;
+            --forest-green: #2d4a3e;
+            --mint-cream: #f1f8f4;
+            --warm-cream: #faf8f3;
+            --terracotta: #c17f59;
+            --golden-amber: #d4a373;
+            --deep-brown: #3d2b1f;
+            --charcoal: #2c3e2d;
+            --text-body: #4a4a4a;
+            --text-light: #8b8b8b;
+            
+            /* Spacing scale */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 4rem;
+            --space-xl: 6rem;
+            
+            /* Typography */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            
+            /* Effects */
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --shadow-soft: 0 4px 20px rgba(45, 74, 62, 0.08);
+            --shadow-medium: 0 8px 30px rgba(45, 74, 62, 0.12);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--warm-cream);
+            color: var(--text-body);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           UTILITY CLASSES
+           Reusable layout helpers
+           ============================================ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .flex {
+            display: flex;
+            align-items: center;
+        }
+
+        .grid {
+            display: grid;
+            gap: var(--space-md);
+        }
+
+        /* ============================================
+           ANIMATIONS
+           Simple CSS keyframes for smooth effects
+           ============================================ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes leafSway {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================
+           NAVIGATION
+           Clean header with organic styling
+           ============================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(250, 248, 243, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(124, 154, 107, 0.2);
+            padding: var(--space-sm) 0;
+            transition: var(--transition);
+        }
+
+        .navbar .container {
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--forest-green);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .logo i {
+            color: var(--sage-green);
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-lg);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-body);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--sage-green);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--sage-green);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--sage-green);
+            color: white !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 100px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-cta:hover {
+            background: var(--forest-green);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--forest-green);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ============================================
+           HERO SECTION
+           Organic, nature-inspired landing
+           ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+            background: linear-gradient(135deg, var(--mint-cream) 0%, var(--warm-cream) 100%);
+            overflow: hidden;
+        }
+
+        /* Decorative organic shapes */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(124, 154, 107, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(193, 127, 89, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            border: 1px solid rgba(124, 154, 107, 0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            color: var(--sage-green);
+            margin-bottom: var(--space-md);
+            font-weight: 500;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .hero-badge i {
+            animation: leafSway 3s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.8rem, 5vw, 4.2rem);
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--forest-green);
+            margin-bottom: var(--space-md);
+        }
+
+        .hero h1 span {
+            color: var(--terracotta);
+            font-style: italic;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-body);
+            max-width: 550px;
+            margin-bottom: var(--space-lg);
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.2rem;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--sage-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(124, 154, 107, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--forest-green);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--forest-green);
+            border: 2px solid var(--sage-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--sage-green);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Hero image area with organic shapes */
+        .hero-visual {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 500px;
+            height: 500px;
+            z-index: 2;
+        }
+
+        .hero-image-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            box-shadow: var(--shadow-medium);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-leaf {
+            position: absolute;
+            font-size: 2rem;
+            color: var(--sage-green);
+            opacity: 0.6;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .floating-leaf:nth-child(2) { top: 10%; left: -10%; animation-delay: 1s; }
+        .floating-leaf:nth-child(3) { bottom: 20%; right: -5%; animation-delay: 2s; font-size: 1.5rem; }
+        .floating-leaf:nth-child(4) { top: 50%; right: -15%; animation-delay: 3s; font-size: 1.2rem; }
+
+        /* ============================================
+           ABOUT SECTION
+           Story-driven content with organic layout
+           ============================================ */
+        .about {
+            padding: var(--space-xl) 0;
+            background: white;
+            position: relative;
+        }
+
+        .about-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--sage-green);
+            border-radius: var(--radius-lg);
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .about-content .section-label {
+            display: inline-block;
+            color: var(--sage-green);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: var(--space-sm);
+        }
+
+        .about-content h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--forest-green);
+            margin-bottom: var(--space-md);
+            line-height: 1.2;
+        }
+
+        .about-content p {
+            color: var(--text-body);
+            margin-bottom: var(--space-md);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .values-list {
+            list-style: none;
+            margin-top: var(--space-md);
+        }
+
+        .values-list li {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-sm);
+            color: var(--text-body);
+            font-weight: 500;
+        }
+
+        .values-list i {
+            color: var(--sage-green);
+            font-size: 1.2rem;
+        }
+
+        /* ============================================
+           SERVICES SECTION
+           Card-based offerings with hover effects
+           ============================================ */
+        .services {
+            padding: var(--space-xl) 0;
+            background: var(--mint-cream);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto var(--space-lg);
+        }
+
+        .section-header .section-label {
+            display: inline-block;
+            color: var(--sage-green);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: var(--space-sm);
+        }
+
+        .section-header h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--forest-green);
+            margin-bottom: var(--space-sm);
+        }
+
+        .section-header p {
+            color: var(--text-body);
+            font-size: 1.1rem;
+        }
+
+        .services-grid {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .service-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: var(--space-lg) var(--space-md);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(124, 154, 107, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sage-green), var(--golden-amber));
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+            border-color: transparent;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--mint-cream), var(--warm-cream));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--sage-green);
+            margin: 0 auto var(--space-md);
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--sage-green);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--forest-green);
+            margin-bottom: var(--space-sm);
+        }
+
+        .service-card p {
+            color: var(--text-body);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: var(--space-md);
+        }
+
+        .service-link {
+            color: var(--sage-green);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: var(--transition);
+        }
+
+        .service-link:hover {
+            color: var(--forest-green);
+            gap: 0.6rem;
+        }
+
+        /* ============================================
+           BENEFITS SECTION
+           Visual feature highlights
+           ============================================ */
+        .benefits {
+            padding: var(--space-xl) 0;
+            background: white;
+        }
+
+        .benefits-grid {
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: var(--space-md);
+        }
+
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--mint-cream);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--sage-green);
+            margin: 0 auto var(--space-md);
+            border: 2px solid rgba(124, 154, 107, 0.2);
+        }
+
+        .benefit-item h3 {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            color: var(--forest-green);
+            margin-bottom: var(--space-xs);
+        }
+
+        .benefit-item p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* ============================================
+           TESTIMONIALS / SOCIAL PROOF
+           Community validation
+           ============================================ */
+        .testimonials {
+            padding: var(--space-xl) 0;
+            background: linear-gradient(135deg, var(--forest-green) 0%, var(--charcoal) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124, 154, 107, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .testimonials .section-header h2,
+        .testimonials .section-header p {
+            color: white;
+        }
+
+        .testimonials .section-label {
+            color: var(--golden-amber);
+        }
+
+        .testimonials-grid {
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .testimonial-stars {
+            color: var(--golden-amber);
+            margin-bottom: var(--space-sm);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: var(--space-md);
+            font-style: italic;
+            opacity: 0.95;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--sage-green), var(--golden-amber));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .author-info h4 {
+            font-weight: 600;
+            font-size: 1rem;
+            color: white;
+        }
+
+        .author-info p {
+            color: var(--golden-amber);
+            font-size: 0.875rem;
+        }
+
+        /* ============================================
+           SOCIALS / NEWSLETTER SECTION
+           Community connection and engagement
+           ============================================ */
+        .socials {
+            padding: var(--space-xl) 0;
+            background: var(--warm-cream);
+            text-align: center;
+        }
+
+        .socials-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .socials h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--forest-green);
+            margin-bottom: var(--space-sm);
+        }
+
+        .socials > .container > p {
+            color: var(--text-body);
+            font-size: 1.1rem;
+            margin-bottom: var(--space-lg);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .social-grid {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .social-card {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: var(--radius-md);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            text-decoration: none;
+            color: var(--forest-green);
+            border: 2px solid transparent;
+            transition: var(--transition);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .social-card i {
+            font-size: 2rem;
+            transition: var(--transition);
+        }
+
+        .social-card span {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .social-card:hover {
+            border-color: var(--sage-green);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .social-card:hover i {
+            color: var(--sage-green);
+            transform: scale(1.2);
+        }
+
+        /* Newsletter signup */
+        .newsletter {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-soft);
+            max-width: 500px;
+            margin: 0 auto;
+            border: 1px solid rgba(124, 154, 107, 0.2);
+        }
+
+        .newsletter h3 {
+            font-family: var(--font-heading);
+            color: var(--forest-green);
+            margin-bottom: var(--space-sm);
+            font-size: 1.5rem;
+        }
+
+        .newsletter p {
+            color: var(--text-body);
+            margin-bottom: var(--space-md);
+            font-size: 0.95rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(124, 154, 107, 0.3);
+            border-radius: 100px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+            min-width: 200px;
+        }
+
+        .newsletter-form input:focus {
+            border-color: var(--sage-green);
+            box-shadow: 0 0 0 3px rgba(124, 154, 107, 0.1);
+        }
+
+        .newsletter-form button {
+            padding: 1rem 2rem;
+            background: var(--sage-green);
+            color: white;
+            border: none;
+            border-radius: 100px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .newsletter-form button:hover {
+            background: var(--forest-green);
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           FOOTER
+           Clean, organized footer
+           ============================================ */
+        .footer {
+            background: var(--forest-green);
+            color: rgba(255, 255, 255, 0.8);
+            padding: var(--space-xl) 0 var(--space-md);
+        }
+
+        .footer-grid {
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-brand .logo i {
+            color: var(--golden-amber);
+        }
+
+        .footer-brand p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 300px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-links h4 {
+            font-family: var(--font-heading);
+            color: white;
+            margin-bottom: var(--space-md);
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--space-xs);
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--golden-amber);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: var(--space-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .footer-bottom p {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .footer-socials a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-socials a:hover {
+            background: var(--sage-green);
+            transform: translateY(-3px);
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           Mobile-friendly adjustments
+           ============================================ */
+        @media (max-width: 1024px) {
+            .hero-visual {
+                display: none;
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--warm-cream);
+                flex-direction: column;
+                padding: var(--space-md);
+                border-top: 1px solid rgba(124, 154, 107, 0.2);
+                box-shadow: var(--shadow-soft);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .steps {
+                flex-direction: column;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input,
+            .newsletter-form button {
+                width: 100%;
+            }
+        }
+
+        /* ============================================
+           SCROLLBAR STYLING
+           Custom scrollbar for polish
+           ============================================ */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--warm-cream);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--sage-green);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--forest-green);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         NAVIGATION
+         Fixed header with smooth scroll links
+         ============================================ -->
+    <nav class="navbar">
+        <div class="container flex">
+            <a href="#" class="logo">
+                <i class="fas fa-leaf"></i>
+                Vitalis Botanicals
+            </a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#socials">Socials</a></li>
+                <li><a href="#contact" class="nav-cta">Get Started</a></li>
+            </ul>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ============================================
+         HERO SECTION (HOME)
+         Main landing with nature-inspired design
+         ============================================ -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-seedling"></i>
+                    100% Organic & Sustainable
+                </div>
+                
+                <h1>
+                    Nourish Your Body with <span>Nature's Wisdom</span>
+                </h1>
+                
+                <p>
+                    We infuse every meal and drink with carefully selected herbs, spices, and essential oils to boost your immunity, enhance vitality, and bring holistic wellness to your daily life.
+                </p>
+                
+                <div class="hero-buttons">
+                    <a href="#services" class="btn btn-primary">
+                        <i class="fas fa-utensils"></i>
+                        Explore Our Menu
+                    </a>
+                    <a href="#about" class="btn btn-secondary">
+                        <i class="fas fa-play"></i>
+                        Our Story
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Organic visual with floating elements -->
+            <div class="hero-visual">
+                <div class="hero-image-container">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&h=500&fit=crop" alt="Healthy herbal meal bowl with fresh ingredients" class="hero-image">
+                    <div class="floating-leaf"><i class="fas fa-leaf"></i></div>
+                    <div class="floating-leaf"><i class="fas fa-spa"></i></div>
+                    <div class="floating-leaf"><i class="fas fa-mortar-pestle"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         ABOUT US SECTION
+         Company story and mission
+         ============================================ -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="grid about-grid">
+                <div class="about-image animate-on-scroll">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=500&fit=crop" alt="Hands preparing herbs and spices in a wooden bowl">
+                </div>
+                
+                <div class="about-content animate-on-scroll">
+                    <span class="section-label">Our Story</span>
+                    <h2>Rooted in Tradition, Crafted for Modern Wellness</h2>
+                    <p>
+                        Founded in 2020, Vitalis Botanicals began with a simple belief: food is medicine. Our founders, herbalists and nutritionists, set out to create a dining experience that heals from within.
+                    </p>
+                    <p>
+                        Every dish we create is a careful blend of ancient herbal wisdom and modern nutritional science. We source our herbs from organic farms, our spices from fair-trade cooperatives, and our essential oils from certified distillers.
+                    </p>
+                    
+                    <ul class="values-list">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>100% Organic Ingredients</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Sustainably Sourced Herbs & Spices</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Certified Aromatherapists on Staff</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Zero Artificial Additives</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SERVICES SECTION
+         What we offer to customers
+         ============================================ -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-label">What We Offer</span>
+                <h2>Wellness in Every Bite & Sip</h2>
+                <p>From energizing morning tonics to restorative evening meals, every creation is designed to support your body's natural balance.</p>
+            </div>
+            
+            <div class="grid services-grid">
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-mug-hot"></i>
+                    </div>
+                    <h3>Herbal Infusions</h3>
+                    <p>Handcrafted teas and tonics blending adaptogenic herbs like ashwagandha, holy basil, and reishi mushroom to reduce stress and boost immunity.</p>
+                    <a href="#" class="service-link">
+                        View Menu <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-bowl-food"></i>
+                    </div>
+                    <h3>Botanical Meals</h3>
+                    <p>Chef-prepared dishes infused with turmeric, ginger, garlic, and rosemary. Each plate is a symphony of flavor and functional nutrition.</p>
+                    <a href="#" class="service-link">
+                        View Menu <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-droplet"></i>
+                    </div>
+                    <h3>Aromatherapy Drinks</h3>
+                    <p>Refreshing beverages enhanced with food-grade essential oils like peppermint, lavender, and citrus for mental clarity and digestive ease.</p>
+                    <a href="#" class="service-link">
+                        View Menu <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-jar"></i>
+                    </div>
+                    <h3>Wellness Kits</h3>
+                    <p>Take-home packages including spice blends, herbal salts, essential oil rollers, and guided recipes for your personal wellness journey.</p>
+                    <a href="#" class="service-link">
+                        Shop Now <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-apple-whole"></i>
+                    </div>
+                    <h3>Detox Programs</h3>
+                    <p>3-day and 7-day guided cleanses featuring cold-pressed juices, herbal supplements, and anti-inflammatory meal plans.</p>
+                    <a href="#" class="service-link">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-chalkboard-user"></i>
+                    </div>
+                    <h3>Wellness Workshops</h3>
+                    <p>Monthly classes on herbal medicine making, spice pairing for health, and safe essential oil usage for home and kitchen.</p>
+                    <a href="#" class="service-link">
+                        Join Next Class <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         BENEFITS SECTION
+         Key health advantages
+         ============================================ -->
+    <section class="benefits">
+        <div class="container">
+            <div class="grid benefits-grid">
+                <div class="benefit-item animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-heart"></i>
+                    </div>
+                    <h3>Immunity Boost</h3>
+                    <p>Echinacea, elderberry, and zinc-rich spices strengthen your natural defenses</p>
+                </div>
+                
+                <div class="benefit-item animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Mental Clarity</h3>
+                    <p>Rosemary, ginkgo, and peppermint oils enhance focus and cognitive function</p>
+                </div>
+                
+                <div class="benefit-item animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>Metabolic Balance</h3>
+                    <p>Cinnamon, cayenne, and green tea extracts support healthy metabolism</p>
+                </div>
+                
+                <div class="benefit-item animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h3>Restful Sleep</h3>
+                    <p>Chamomile, valerian, and lavender promote deep, restorative rest</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         TESTIMONIALS
+         Customer reviews and success stories
+         ============================================ -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-label">Community Love</span>
+                <h2>Stories of Transformation</h2>
+                <p>Real experiences from our wellness community</p>
+            </div>
+            
+            <div class="grid testimonials-grid">
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "After three months of their turmeric-ginger tonics and botanical meals, my chronic inflammation reduced significantly. My doctor was amazed at my improved markers. This isn't just food—it's healing."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">EW</div>
+                        <div class="author-info">
+                            <h4>Elena Williams</h4>
+                            <p>Yoga Instructor, Portland</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "The aromatherapy lavender lemonade changed my life. I sleep better, stress less, and actually look forward to my morning routine now. Their workshops taught me to make these at home too!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MK</div>
+                        <div class="author-info">
+                            <h4>Marcus Chen</h4>
+                            <p>Software Engineer, Austin</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "As a nutritionist, I'm picky about 'health' brands. Vitalis is the real deal. Their spice blends are pharmaceutical-grade, and the essential oil infusions are properly diluted and safe. Finally, integrity in wellness!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DR</div>
+                        <div class="author-info">
+                            <h4>Dr. Rachel Okafor</h4>
+                            <p>Clinical Nutritionist, Atlanta</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SOCIALS SECTION
+         Connect with community and newsletter
+         ============================================ -->
+    <section class="socials" id="socials">
+        <div class="container">
+            <div class="socials-content animate-on-scroll">
+                <span class="section-label">Join Our Community</span>
+                <h2>Connect With Vitalis</h2>
+                <p>Follow our journey, share your wellness story, and be part of a movement towards natural, intentional living.</p>
+            </div>
+            
+            <div class="social-grid animate-on-scroll">
+                <a href="https://instagram.com" target="_blank" class="social-card" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://facebook.com" target="_blank" class="social-card" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                    <span>Facebook</span>
+                </a>
+                <a href="https://tiktok.com" target="_blank" class="social-card" aria-label="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                    <span>TikTok</span>
+                </a>
+                <a href="https://youtube.com" target="_blank" class="social-card" aria-label="YouTube">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </a>
+                <a href="https://pinterest.com" target="_blank" class="social-card" aria-label="Pinterest">
+                    <i class="fab fa-pinterest-p"></i>
+                    <span>Pinterest</span>
+                </a>
+            </div>
+            
+            <div class="newsletter animate-on-scroll">
+                <h3>The Botanical Brief</h3>
+                <p>Weekly recipes, herbal wisdom, and exclusive offers delivered to your inbox.</p>
+                <form class="newsletter-form" onsubmit="handleSubscribe(event)">
+                    <input type="email" placeholder="Enter your email address" required aria-label="Email for newsletter">
+                    <button type="submit">
+                        <i class="fas fa-paper-plane"></i> Subscribe
+                    </button>
+                </form>
+                <p id="subscribeMessage" style="margin-top: var(--space-sm); color: var(--sage-green); font-weight: 600; display: none;">
+                    <i class="fas fa-check-circle"></i> Welcome to the family! Check your inbox.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         Comprehensive site footer with contact
+         ============================================ -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="grid footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <i class="fas fa-leaf"></i>
+                        Vitalis Botanicals
+                    </a>
+                    <p>Nourishing bodies and souls through the ancient wisdom of herbs, spices, and essential oils. Based in Portland, serving wellness seekers everywhere.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#socials">Community</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Herbal Infusions</a></li>
+                        <li><a href="#">Botanical Meals</a></li>
+                        <li><a href="#">Wellness Kits</a></li>
+                        <li><a href="#">Detox Programs</a></li>
+                        <li><a href="#">Workshops</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:hello@vitalisbotanicals.com">hello@vitalisbotanicals.com</a></li>
+                        <li><a href="tel:+15035551234">(503) 555-1234</a></li>
+                        <li><a href="#">123 Herbal Lane, Portland, OR</a></li>
+                        <li><a href="#">Mon-Sat: 7am - 8pm</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p> 2026 Vitalis Botanicals. All rights reserved. These statements have not been evaluated by the FDA.</p>
+                <div class="footer-socials">
+                    <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         JAVASCRIPT
+         Interactive functions for the page
+         ============================================ -->
+    <script>
+        // Intersection Observer for scroll animations
+        // Watches elements and fades them in when they enter viewport
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle functionality
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileBtn.querySelector('i').classList.remove('fa-times');
+                mobileBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        // Newsletter subscription handler
+        function handleSubscribe(event) {
+            event.preventDefault();
+            const message = document.getElementById('subscribeMessage');
+            const form = event.target;
+            
+            // Show success message
+            message.style.display = 'block';
+            message.style.animation = 'fadeInUp 0.5s ease';
+            
+            // Reset form
+            form.reset();
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 5000);
+        }
+
+        // Smooth scroll for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const target = document.querySelector(targetId);
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add shadow to navbar on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 2px 20px rgba(45, 74, 62, 0.1)';
+            } else {
+                navbar.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
