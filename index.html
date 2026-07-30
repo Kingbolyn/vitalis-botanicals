@@ -1054,6 +1054,130 @@
         animation: none !important;
       }
     }
+
+    /* ── PRODUCT MODALS ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(28, 58, 47, 0.55);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-panel {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: var(--linen);
+      border-top: 1px solid var(--parchment);
+      max-height: 88vh;
+      overflow-y: auto;
+      transform: translateY(100%);
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      padding: 2.5rem 5vw 4rem;
+    }
+    .modal-overlay.open .modal-panel {
+      transform: translateY(0);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--parchment);
+      padding-bottom: 1.5rem;
+    }
+    .modal-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      color: var(--forest);
+    }
+    .modal-header p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+      max-width: 480px;
+      line-height: 1.6;
+    }
+    .modal-close {
+      background: none;
+      border: 1px solid var(--parchment);
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-left: 1.5rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .modal-close:hover { border-color: var(--forest); color: var(--forest); }
+    .modal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .modal-product {
+      background: white;
+      border: 1px solid var(--parchment);
+      overflow: hidden;
+    }
+    .modal-product-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+    }
+    .modal-product-body {
+      padding: 1.1rem 1.2rem 1.4rem;
+    }
+    .modal-product-name {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.35;
+      margin-bottom: 0.3rem;
+    }
+    .modal-product-note {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+    .modal-product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-product-price {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--forest);
+    }
+    .modal-product-btn {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber);
+      border: 1px solid var(--amber);
+      padding: 0.35rem 0.75rem;
+      cursor: pointer;
+      background: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .modal-product-btn:hover { background: var(--amber); color: white; }
   </style>
 </head>
 <body>
@@ -1159,7 +1283,7 @@
             <span class="product-item-name">Green Clay Detox Mask</span>
           </div>
         </div>
-        <a href="#" class="product-link">View Skincare Range &#8594;</a>
+        <a href="#" class="product-link" onclick="openModal('skincare');return false;">View Skincare Range &#8594;</a>
       </div>
     </div>
 
@@ -1185,7 +1309,7 @@
             <span class="product-item-name">Turmeric and Black Pepper Extract</span>
           </div>
         </div>
-        <a href="#" class="product-link">View Supplements &#8594;</a>
+        <a href="#" class="product-link" onclick="openModal('supplements');return false;">View Supplements &#8594;</a>
       </div>
       <div class="product-visual amber-bg" style="background-image: url('https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800&q=80&fit=crop')">
         <div class="product-visual-inner">
@@ -1223,7 +1347,7 @@
             <span class="product-item-note">Focus and energy</span>
           </div>
         </div>
-        <a href="#" class="product-link">View Essential Oils &#8594;</a>
+        <a href="#" class="product-link" onclick="openModal('oils');return false;">View Essential Oils &#8594;</a>
       </div>
     </div>
 
@@ -1250,7 +1374,7 @@
             <span class="product-item-name">Still Water (Lemon Balm and Oat Straw)</span>
           </div>
         </div>
-        <a href="#" class="product-link">View Tea Range &#8594;</a>
+        <a href="#" class="product-link" onclick="openModal('teas');return false;">View Tea Range &#8594;</a>
       </div>
       <div class="product-visual">
         <div class="tea-grid">
@@ -1522,5 +1646,101 @@
     }
   </script>
 
+  <!-- PRODUCT MODALS -->
+  <div class="modal-overlay" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <div>
+          <h2 id="modalTitle"></h2>
+          <p id="modalDesc"></p>
+        </div>
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-grid" id="modalGrid"></div>
+    </div>
+  </div>
+
+  <script>
+    const MODAL_DATA = {
+      skincare: {
+        title: 'Botanical Skincare',
+        desc: 'Formulated without synthetic fillers. Each product concentrates plant-derived actives that work with your skin barrier, not against it.',
+        products: [
+          { name: 'Rosehip Glow Serum', note: 'Bestseller', price: '$38', img: 'https://res.cloudinary.com/dxpixllzg/image/upload/v1784044334/ela-de-pure-dELSBwgHZNw-unsplash_r7vto3.jpg' },
+          { name: 'Bakuchiol Renewal Cream', note: 'Retinol alternative', price: '$45', img: 'https://res.cloudinary.com/dxpixllzg/image/upload/v1784044335/kimia-kazemi--ZzOk7Stu9I-unsplash_zxsmeq.jpg' },
+          { name: 'Sea Buckthorn Face Oil', note: 'For dry skin', price: '$52', img: 'https://res.cloudinary.com/dxpixllzg/image/upload/v1784044336/mery-khachatryan-erBO-SkpbjI-unsplash_sbcmd3.jpg' },
+          { name: 'Green Clay Detox Mask', note: 'Deep cleanse', price: '$28', img: 'https://res.cloudinary.com/dxpixllzg/image/upload/v1784044660/Green_Clay_Detox_Mask_tkr5gi.jpg' },
+        ]
+      },
+      supplements: {
+        title: 'Daily Supplements',
+        desc: 'Adaptogens, nootropics, and whole-plant extracts. Designed for results you can feel, without ingredients you cannot pronounce.',
+        products: [
+          { name: 'Ashwagandha Daily Calm', note: '60 capsules', price: '$34', img: 'https://res.cloudinary.com/dxpixllzg/image/upload/v1784044741/supliful-supplements-on-demand-ZL5PSYBfPwk-unsplash_csgzxp.jpg' },
+          { name: 'Reishi Immunity Complex', note: '30-day supply', price: '$42', img: 'https://res.cloudinary.com/dxpixllzg/image/upload/v1784044881/reishi_erurwu.jpg' },
+          { name: 'Moringa Vitality Blend', note: 'Whole-leaf powder', price: '$29', img: 'https://res.cloudinary.com/dxpixllzg/image/upload/v1784045061/moringa_iopdmr.webp' },
+          { name: 'Turmeric & Black Pepper Extract', note: 'Anti-inflammatory', price: '$32', img: 'https://res.cloudinary.com/dxpixllzg/image/upload/v1784045158/turmeric_lv1ivq.jpg' },
+        ]
+      },
+      oils: {
+        title: 'Essential Oils',
+        desc: 'Steam-distilled and cold-pressed. Sourced from the regions where each plant reaches its highest oil concentration. No blending agents.',
+        products: [
+          { name: 'True Lavender (Provence)', note: 'Sleep and calm', price: '$24', img: 'https://res.cloudinary.com/dxpixllzg/image/upload/v1784045369/nicholas-safran-KajBZdnjafQ-unsplash_vib4xt.jpg' },
+          { name: 'Frankincense Sacra', note: 'Skin and meditation', price: '$38', img: 'https://res.cloudinary.com/dxpixllzg/image/upload/v1784045478/trnava-university-M-HX1_nmBvk-unsplash_sbe3jc.jpg' },
+          { name: 'Neroli Absolute', note: 'Mood and confidence', price: '$46', img: 'https://res.cloudinary.com/dxpixllzg/image/upload/v1784045616/neroli_s6zsye.jpg' },
+          { name: 'Peppermint (Oregon)', note: 'Focus and energy', price: '$19', img: 'https://res.cloudinary.com/dxpixllzg/image/upload/v1784045749/peppermint_etz6lk.avif' },
+        ]
+      },
+      teas: {
+        title: 'Botanical Teas',
+        desc: 'Loose-leaf blends built for intention, not convenience. Each blend is formulated around a specific outcome: sleep, clarity, digestion, or immunity.',
+        products: [
+          { name: 'Night Bloom', note: 'Chamomile & Valerian — Sleep blend', price: '$22', img: 'https://res.cloudinary.com/dxpixllzg/image/upload/v1784045866/nia-ramirez-C1dunESLYBQ-unsplash_wagddz.jpg' },
+          { name: 'Clarity Steep', note: 'Tulsi & Ginkgo — Focus blend', price: '$24', img: 'https://res.cloudinary.com/dxpixllzg/image/upload/v1784046502/tulsi_ovfb0r.webp' },
+          { name: 'Inner Fire', note: 'Rooibos & Ginger — Energy blend', price: '$20', img: 'https://res.cloudinary.com/dxpixllzg/image/upload/v1784046615/ginger_inq4jt.webp' },
+          { name: 'Still Water', note: 'Lemon Balm & Oat Straw — Calm blend', price: '$22', img: 'https://res.cloudinary.com/dxpixllzg/image/upload/v1784046834/Lemon-Balm-Oat-Straw-Tea_tffgon.jpg' },
+        ]
+      }
+    };
+
+    function openModal(key) {
+      const data = MODAL_DATA[key];
+      if (!data) return;
+      document.getElementById('modalTitle').textContent = data.title;
+      document.getElementById('modalDesc').textContent = data.desc;
+      document.getElementById('modalGrid').innerHTML = data.products.map(p => `
+        <div class="modal-product">
+          <img class="modal-product-img" src="${p.img}" alt="${p.name}" loading="lazy">
+          <div class="modal-product-body">
+            <div class="modal-product-name">${p.name}</div>
+            <div class="modal-product-note">${p.note}</div>
+            <div class="modal-product-footer">
+              <span class="modal-product-price">${p.price}</span>
+              <button class="modal-product-btn">Add to bag</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      const overlay = document.getElementById('productModal');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('productModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('productModal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+
+  <script async data-uid="fbd7832bdf" src="https://apex-code-studio.kit.com/fbd7832bdf/index.js"></script>
 </body>
 </html>
